@@ -502,3 +502,11 @@ If you adapt or extend FairRoute, please consider:
   - Robust fairness evaluation.
 - For the purposes of the G7 GovAI Grand Challenge, it illustrates how **multilingual triage, routing and explanation** can be implemented in a concrete, inspectable way.
 
+## Ownership and copyright
+
+FairRoute: Multilingual Benefit Triage, Routing & Explanation Assistant was created by  
+**Fanmei Wang and Alexander YZ Fu** (2025).
+
+Unless otherwise noted, all source code and documentation in this repository is  
+Copyright (c) 2025 Fanmei Wang and Alexander YZ Fu. All rights reserved.
+
