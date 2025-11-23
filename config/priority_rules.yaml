@@ -1,1 +1,13 @@
-priority_rules.yaml
+weights:
+  base: 0.2
+  imminent_income_loss: 0.4
+  has_children: 0.2
+  is_single_parent: 0.1
+  has_disability_or_accommodation: 0.2
+  high_unemployment_province: 0.1
+
+high_unemployment_provinces:
+  - NL
+  - PE
+  - NB
+  - NS

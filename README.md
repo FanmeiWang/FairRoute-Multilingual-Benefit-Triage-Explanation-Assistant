@@ -227,7 +227,7 @@ This demonstrates **triage, routing, explanation and evidence logging** across b
 A simplified view of the repository:
 
 ~~~text
-fairroute/
+FairRoute-Multilingual-Benefit-Triage-Explanation-Assistant/
   backend/
     app/
       __init__.py

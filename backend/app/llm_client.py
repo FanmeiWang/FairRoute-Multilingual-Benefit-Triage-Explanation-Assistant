@@ -1,19 +1,29 @@
 from typing import Any, Dict
 import json
+import os
 
+from dotenv import load_dotenv
 from openai import OpenAI
 
-from .config import settings
 from .models import CaseProfile, RawIntake
 
-client = OpenAI(api_key=settings.openai_api_key)
+# Load .env so that OPENAI_API_KEY / OPENAI_MODEL_NAME go into os.environ
+# This runs as soon as the module is imported by FastAPI.
+load_dotenv()
+
+# Create a single OpenAI client.
+# It will automatically read OPENAI_API_KEY from the environment.
+client = OpenAI(api_key="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")
+
+# Read model name from env, default to gpt-4o-mini if not set
+OPENAI_MODEL_NAME = os.getenv("OPENAI_MODEL_NAME", "gpt-4o-mini")
 
 
 async def parse_case_with_llm(intake: RawIntake) -> CaseProfile:
     """
-    使用 OpenAI Chat Completion 把自然语言转换成 CaseProfile JSON。
+    Use OpenAI Chat Completions to turn free text into a CaseProfile JSON.
     """
-    # system prompt 约束输出结构
+
     system_prompt = """
 You are an assistant that extracts a structured profile for benefit triage in Canada.
 Return ONLY a JSON object matching this schema:
@@ -47,10 +57,10 @@ Only output JSON, no extra text.
     ]
 
     resp = client.chat.completions.create(
-        model=settings.openai_model_name,
+        model=OPENAI_MODEL_NAME,
         messages=messages,
         temperature=0,
-        response_format={"type": "json_object"}
+        response_format={"type": "json_object"},
     )
 
     content = resp.choices[0].message.content
@@ -61,7 +71,7 @@ Only output JSON, no extra text.
 
 async def generate_explanation_with_llm(payload: Dict[str, Any]) -> str:
     """
-    用 LLM 把规则模板 + guidance 变成易懂解释。
+    Use the LLM to turn rule templates + guidance into a plain-language explanation.
     """
     base_text = payload.get("base_text", "")
     extra_context = payload.get("extra_context", "")
@@ -90,7 +100,7 @@ Your task:
     )
 
     resp = client.chat.completions.create(
-        model=settings.openai_model_name,
+        model=OPENAI_MODEL_NAME,
         messages=[
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_content},
@@ -98,4 +108,4 @@ Your task:
         temperature=0.3,
     )
 
-return resp.choices[0].message.content.strip()
+    return resp.choices[0].message.content.strip()

@@ -1,1 +1,7 @@
-requirements.txt
+fastapi
+uvicorn[standard]
+pydantic
+python-dotenv
+pyyaml
+httpx
+openai

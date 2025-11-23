@@ -1,1 +1,21 @@
-program_guides.json
+{
+  "EI_REGULAR": {
+    "eligibility_text_en": "You may be eligible for EI regular benefits if you lost your job through no fault of your own, have enough insurable hours and are available for and able to work while you look for a job.",
+    "eligibility_text_fr": "Vous pourriez être admissible aux prestations régulières d'assurance-emploi si vous avez perdu votre emploi sans en être responsable, que vous avez suffisamment d'heures assurables et que vous êtes disponible et capable de travailler tout en cherchant un emploi.",
+    "required_documents_en": [
+      "Social Insurance Number (SIN)",
+      "Record of Employment (ROE) for each job in the last 52 weeks",
+      "Banking information for direct deposit",
+      "Basic information about your work history and reason for separation from each job"
+    ],
+    "url_en": "https://www.canada.ca/en/services/benefits/ei/ei-regular-benefit.html",
+    "url_fr": "https://www.canada.ca/fr/services/prestations/ae/prestations-regulieres-ae.html"
+  },
+  "CCB": {
+    "summary_en": "Basic information about the Canada Child Benefit (CCB).",
+    "summary_fr": "Renseignements de base sur la Prestation canadienne pour enfants (PCE).",
+    "url_en": "https://www.canada.ca/en/revenue-agency/services/child-family-benefits/canada-child-benefit-overview.html",
+    "url_fr": "https://www.canada.ca/fr/agence-revenu/services/prestations/enfants-familles/prestation-canadienne-enfants-aperçu.html"
+  }
+}
+

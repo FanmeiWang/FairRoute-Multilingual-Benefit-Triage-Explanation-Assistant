@@ -1,1 +1,28 @@
-rules.yaml
+services:
+  - id: EI
+    name_en: "Employment Insurance (EI)"
+    name_fr: "Assurance-emploi"
+    program_group: "income_support"
+    tags: ["income_support", "ei"]
+    rules:
+      - id: ei_basic_eligibility
+        condition: "employment_status == 'unemployed' and insurable_hours_last_52_weeks >= 420"
+        outcome: "eligible"
+        explanation_template_en: >
+          Based on what you told us, you may meet the basic rules for Employment Insurance (EI).
+        explanation_template_fr: >
+          Selon les renseignements fournis, vous pourriez remplir les règles de base de l'assurance-emploi.
+
+  - id: CCB
+    name_en: "Canada Child Benefit (CCB)"
+    name_fr: "Prestation canadienne pour enfants"
+    program_group: "family"
+    tags: ["children", "family"]
+    rules:
+      - id: ccb_has_children
+        condition: "children_count and children_count > 0"
+        outcome: "eligible"
+        explanation_template_en: >
+          Because you have at least one child, you may be eligible for the Canada Child Benefit (CCB).
+        explanation_template_fr: >
+          Parce que vous avez au moins un enfant, vous pourriez avoir droit à la Prestation canadienne pour enfants (PCE).

@@ -13,8 +13,14 @@ def build_staff_explanation(
 
     if fired_rules:
         for rule in fired_rules:
+            # 兼容两种写法：rule_id 或 id，缺了就给一个占位符
+            rule_id = rule.get("rule_id") or rule.get("id") or "unnamed_rule"
+            source_act = rule.get("source_act", "unknown source")
+            section = rule.get("section", "")
+            outcome = rule.get("outcome", "unknown")
+
             parts.append(
-                f"Rule {rule['rule_id']} from {rule['source_act']} {rule['section']} fired with outcome '{rule['outcome']}'."
+                f"Rule {rule_id} from {source_act} {section} fired with outcome '{outcome}'."
             )
     else:
         parts.append("No specific rule fired; case requires human review.")

@@ -1,1 +1,5 @@
-  .gitignore
+  .gitignore# Development log
+
+## 2025-11-22
+- Initial backend + frontend skeleton for FairRoute.
+
