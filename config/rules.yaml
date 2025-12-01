@@ -1,28 +1,88 @@
 services:
-  - id: EI
-    name_en: "Employment Insurance (EI)"
-    name_fr: "Assurance-emploi"
+  - id: EI_REGULAR
+    name_en: "Employment Insurance (EI) - regular benefits"
+    name_fr: "Assurance-emploi (AE) - prestations régulières"
     program_group: "income_support"
-    tags: ["income_support", "ei"]
+    tags: ["income_support", "ei", "job_loss"]
     rules:
       - id: ei_basic_eligibility
-        condition: "employment_status == 'unemployed' and insurable_hours_last_52_weeks >= 420"
+        condition: "employment_status == 'unemployed' and insurable_hours_last_52_weeks is not None and insurable_hours_last_52_weeks >= 420"
         outcome: "eligible"
         explanation_template_en: >
-          Based on what you told us, you may meet the basic rules for Employment Insurance (EI).
+          Based on what you told us, you may meet the basic rules for regular Employment
+          Insurance (EI). This usually requires a minimum number of insurable hours in
+          the last 52 weeks.
         explanation_template_fr: >
-          Selon les renseignements fournis, vous pourriez remplir les règles de base de l'assurance-emploi.
+          Selon les renseignements fournis, vous pourriez remplir les règles de base des
+          prestations régulières de l'assurance-emploi. Cela exige habituellement un
+          nombre minimal d'heures assurables au cours des 52 dernières semaines.
+        section: "Employment Insurance Act s.7"
+
+      - id: ei_need_hours_info
+        condition: "employment_status == 'unemployed' and insurable_hours_last_52_weeks is None"
+        outcome: "need_more_info"
+        explanation_template_en: >
+          To estimate your EI eligibility, we need to know roughly how many insurable
+          hours you worked in the last 52 weeks.
+        explanation_template_fr: >
+          Pour estimer votre admissibilité à l'assurance-emploi, nous devons connaître
+          approximativement le nombre d'heures assurables que vous avez travaillées au
+          cours des 52 dernières semaines.
+        section: "Employment Insurance Act s.7"
 
   - id: CCB
     name_en: "Canada Child Benefit (CCB)"
-    name_fr: "Prestation canadienne pour enfants"
+    name_fr: "Prestation canadienne pour enfants (PCE)"
     program_group: "family"
-    tags: ["children", "family"]
+    tags: ["children", "family", "tax_benefit"]
     rules:
-      - id: ccb_has_children
-        condition: "children_count and children_count > 0"
+      # 1) 至少一个未成年小孩
+      - id: ccb_has_child_under_18
+        condition: "children_count is not None and children_count > 0"
         outcome: "eligible"
         explanation_template_en: >
-          Because you have at least one child, you may be eligible for the Canada Child Benefit (CCB).
+          Because you have at least one child, you may be eligible for the Canada Child
+          Benefit (CCB), which helps with the cost of raising children under 18.
         explanation_template_fr: >
-          Parce que vous avez au moins un enfant, vous pourriez avoir droit à la Prestation canadienne pour enfants (PCE).
+          Parce que vous avez au moins un enfant, vous pourriez avoir droit à la
+          Prestation canadienne pour enfants (PCE), qui aide à couvrir le coût de
+          l'éducation des enfants de moins de 18 ans.
+        section: "Income Tax Act s.122.61"
+
+      # 2) 主要照顾者（这里用 is_single_parent 作为 proxy）
+      - id: ccb_main_caregiver
+        condition: "children_count is not None and children_count > 0 and is_single_parent == True"
+        outcome: "eligible"
+        explanation_template_en: >
+          As the primary caregiver for your children, you may be the person who should
+          apply for the CCB.
+        explanation_template_fr: >
+          En tant que principal fournisseur de soins pour vos enfants, vous pourriez
+          être la personne qui devrait demander la PCE.
+        section: "Income Tax Act s.122.61"
+
+      # 3) 加拿大税务居民
+      - id: ccb_canadian_resident
+        condition: "residency_status == 'canadian_resident'"
+        outcome: "eligible"
+        explanation_template_en: >
+          You said you live in Canada for tax purposes, which is one of the conditions
+          for receiving the CCB.
+        explanation_template_fr: >
+          Vous avez indiqué vivre au Canada aux fins de l'impôt, ce qui est l'une des
+          conditions pour recevoir la PCE.
+        section: "Income Tax Act s.122.61"
+
+      # 4) 报税信息（目前先标记为 need_more_info）
+      - id: ccb_need_tax_filing_info
+        condition: "children_count is not None and children_count > 0"
+        outcome: "need_more_info"
+        explanation_template_en: >
+          To actually receive CCB payments, you and your spouse or partner (if
+          applicable) need to file an income tax return every year, even if you have no
+          income.
+        explanation_template_fr: >
+          Pour recevoir effectivement les paiements de la PCE, vous et votre conjoint
+          ou conjointe (s'il y a lieu) devez produire une déclaration de revenus chaque
+          année, même si vous n'avez aucun revenu.
+        section: "Income Tax Act s.122.61"

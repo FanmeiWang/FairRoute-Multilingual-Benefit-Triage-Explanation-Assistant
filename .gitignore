@@ -1,5 +1,20 @@
-  .gitignore# Development log
+# Ignore environment files
+.env
 
-## 2025-11-22
-- Initial backend + frontend skeleton for FairRoute.
+# Python cache
+__pycache__/
+*.py[cod]
 
+# Node / frontend dependencies
+node_modules/
+dist/
+
+# OS / editor junk
+.DS_Store
+.vscode/
+.idea/
+
+.env
+__pycache__/
+*/__pycache__/
+backend/logs/

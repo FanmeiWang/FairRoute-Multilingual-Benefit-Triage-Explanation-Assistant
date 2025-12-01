@@ -11,13 +11,15 @@ from .models import CaseProfile, RawIntake
 # This runs as soon as the module is imported by FastAPI.
 load_dotenv()
 
+api_key = os.getenv("OPENAI_API_KEY")
+if not api_key:
+    raise RuntimeError("OPENAI_API_KEY environment variable is not set")
+
 # Create a single OpenAI client.
-# It will automatically read OPENAI_API_KEY from the environment.
-client = OpenAI(api_key="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")
+client = OpenAI(api_key=api_key)
 
 # Read model name from env, default to gpt-4o-mini if not set
 OPENAI_MODEL_NAME = os.getenv("OPENAI_MODEL_NAME", "gpt-4o-mini")
-
 
 async def parse_case_with_llm(intake: RawIntake) -> CaseProfile:
     """
@@ -69,9 +71,10 @@ Only output JSON, no extra text.
     return CaseProfile(**data)
 
 
-async def generate_explanation_with_llm(payload: Dict[str, Any]) -> str:
+def generate_explanation_with_llm(payload: Dict[str, Any]) -> str:
     """
     Use the LLM to turn rule templates + guidance into a plain-language explanation.
+    同步版本：注意这里已经不是 async 了。
     """
     base_text = payload.get("base_text", "")
     extra_context = payload.get("extra_context", "")
@@ -109,3 +112,4 @@ Your task:
     )
 
     return resp.choices[0].message.content.strip()
+

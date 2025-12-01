@@ -2,12 +2,12 @@ weights:
   base: 0.2
   imminent_income_loss: 0.4
   has_children: 0.2
-  is_single_parent: 0.1
+  is_single_parent: 0.2        # NEW: 单亲家庭加权
   has_disability_or_accommodation: 0.2
   high_unemployment_province: 0.1
 
-high_unemployment_provinces:
-  - NL
-  - PE
-  - NB
-  - NS
+thresholds:
+  high_priority: 0.8
+  medium_priority: 0.5
+
+high_unemployment_provinces: ["NL", "NB", "NS", "PE"]
