@@ -7,7 +7,7 @@ This MVP focuses on the journey of a **newly unemployed parent** and uses **Empl
 FairRoute combines:
 
 - **LLM-powered natural language understanding** of citizen stories,
-- **Open data and explicit rules** (e.g. from GC Service Inventory, GC InfoBase and legislation),
+- **Open government reference information and explicit rules** (aligned with datasets such as the GC Service Inventory, GC InfoBase and federal legislation, represented here as small demo subsets),
 - **Transparent explanations and evidence packages** for staff,
 - **Fairness- and accessibility-aware triage** (multilingual preferences, disability/accommodation signals, single-parent flag).
 
@@ -119,6 +119,8 @@ The Staff tab reuses the most recent evaluation from the same browser session:
 - `config/priority_rules.yaml` – ticket-priority weights and thresholds.
 
 The architecture is intentionally **modular**: new services, rules, languages and personas can be added by editing configuration files rather than rewriting core logic.
+
+In this MVP, all data under `data/` and `config/` is a small, hand‑curated demo subset and paraphrased summaries of public Canada.ca descriptions for EI and CCB. These files are **schema‑compatible with** open datasets such as the GC Service Inventory and GC InfoBase, but are not full or live copies of those datasets. They are intended to illustrate how a production team could plug real open data into the same pattern.
 
 ---
 
