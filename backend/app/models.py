@@ -60,7 +60,6 @@ class CaseProfile(BaseModel):
 
     insurable_hours_last_52_weeks: Optional[int] = None
 
-    # 扩大的 residency_status 取值，与你前端的选项对齐
     residency_status: Literal[
         "canadian_resident",
         "permanent_resident",
