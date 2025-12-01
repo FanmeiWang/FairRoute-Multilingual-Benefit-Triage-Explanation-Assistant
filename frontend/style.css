@@ -1,0 +1,746 @@
+:root {
+  --fr-bg: #f3f4f6;
+  --fr-surface: #ffffff;
+  --fr-border: #e5e7eb;
+  --fr-primary: #1d4ed8; /* 深蓝 */
+  --fr-primary-dark: #1e40af;
+  --fr-text: #111827;
+  --fr-muted: #4b5563;
+  --fr-note: #6b7280;
+  --fr-radius-lg: 14px;
+  --fr-radius-md: 10px;
+  --fr-shadow-soft: 0 10px 20px rgba(15, 23, 42, 0.08);
+  --fr-line-height: 1.5;
+}
+
+/* ================================
+   Dark mode：深蓝背景 + 亮色文字
+   ================================ */
+
+/* ================================
+   Dark mode：深蓝背景 + 亮色文字
+   ================================ */
+
+.fr-theme-dark {
+  /* 整体背景稍微更偏蓝一点，而不是纯黑 */
+  background-color: #02091f; /* 比 #020617 稍微更蓝一点 */
+  color: #e5e7eb;
+}
+
+/* Dark 模式下，左右 panel 深色 */
+
+.fr-theme-dark .fr-main-panel,
+.fr-theme-dark .fr-accessibility-panel {
+  background-color: #02091f;
+  border-color: #1f2937;
+  box-shadow: none;
+}
+
+/* Dark 模式下主要文字变亮，包括副标题 */
+
+.fr-theme-dark .fr-main-title,
+.fr-theme-dark .fr-main-subtitle,
+.fr-theme-dark .fr-section-title,
+.fr-theme-dark .fr-label,
+.fr-theme-dark .fr-help-title,
+.fr-theme-dark .fr-note,
+.fr-theme-dark .fr-field-help,
+.fr-theme-dark .fr-table th,
+.fr-theme-dark .fr-table td,
+.fr-theme-dark .fr-priority-summary,
+.fr-theme-dark .fr-summary-list li {
+  color: #e5e7eb;
+}
+
+/* Dark 模式下的 Prototype note */
+
+.fr-theme-dark .fr-info-banner {
+  border-radius: var(--fr-radius-md);
+  border: 1px solid #1d4ed8;
+  background: #02091f;
+  padding: 10px 12px;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.fr-theme-dark .fr-info-banner p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #e5e7eb; /* 亮字，避免蓝底蓝字看不清 */
+}
+
+/* Dark 模式下的 program card */
+
+.fr-theme-dark .fr-program-card {
+  background: #02091f;
+  border-color: #1f2937;
+}
+
+/* ================================
+   High contrast：黑底白字高对比
+   ================================ */
+
+.fr-theme-high-contrast {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.fr-theme-high-contrast .fr-main-panel,
+.fr-theme-high-contrast .fr-accessibility-panel {
+  background-color: #000000;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  box-shadow: none;
+}
+
+/* 高对比模式下，所有主要文字都是白色，包括副标题 */
+
+.fr-theme-high-contrast .fr-main-title,
+.fr-theme-high-contrast .fr-main-subtitle,
+.fr-theme-high-contrast .fr-section-title,
+.fr-theme-high-contrast .fr-label,
+.fr-theme-high-contrast .fr-help-title,
+.fr-theme-high-contrast .fr-note,
+.fr-theme-high-contrast .fr-field-help,
+.fr-theme-high-contrast .fr-table th,
+.fr-theme-high-contrast .fr-table td,
+.fr-theme-high-contrast .fr-priority-summary,
+.fr-theme-high-contrast .fr-summary-list li {
+  color: #ffffff;
+}
+
+/* 高对比模式下按钮：黑底白字、白边 */
+
+.fr-theme-high-contrast button,
+.fr-theme-high-contrast .fr-primary-button,
+.fr-theme-high-contrast .fr-secondary-button,
+.fr-theme-high-contrast .fr-inline-button,
+.fr-theme-high-contrast .fr-pill-button,
+.fr-theme-high-contrast .fr-confirm-button {
+  background-color: #000000;
+  color: #ffffff;
+  border-radius: 999px;
+  border: 2px solid #ffffff;
+  box-shadow: none;
+}
+
+/* 高对比模式下 info banner / program card */
+
+.fr-theme-high-contrast .fr-info-banner,
+.fr-theme-high-contrast .fr-program-card {
+  background-color: #000000;
+  border-color: #ffffff;
+}
+
+.fr-theme-high-contrast .fr-info-banner p {
+  color: #ffffff;
+}
+
+/* 高对比模式下 slider 轨道和滑块 */
+
+.fr-theme-high-contrast .fr-accessibility-panel input[type="range"] {
+  background-color: #ffffff;
+}
+
+.fr-theme-high-contrast
+  .fr-accessibility-panel
+  input[type="range"]::-webkit-slider-runnable-track {
+  background-color: #ffffff;
+}
+
+.fr-theme-high-contrast
+  .fr-accessibility-panel
+  input[type="range"]::-webkit-slider-thumb {
+  background-color: #000000;
+  border-color: #ffffff;
+}
+
+.fr-theme-high-contrast
+  .fr-accessibility-panel
+  input[type="range"]::-moz-range-track {
+  background-color: #ffffff;
+}
+
+.fr-theme-high-contrast
+  .fr-accessibility-panel
+  input[type="range"]::-moz-range-thumb {
+  background-color: #000000;
+  border-color: #ffffff;
+}
+
+/* ===== 全局 ===== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background: var(--fr-bg);
+  color: var(--fr-text);
+  line-height: var(--fr-line-height);
+}
+
+.fr-app-root {
+  min-height: 100vh;
+}
+
+/* 布局：左右两栏，减少留白 */
+
+.fr-shell {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 24px 16px 32px;
+  display: flex;
+  gap: 24px;
+}
+
+/* 左侧 Accessibility bar：偏灰一点的深蓝 */
+
+.fr-accessibility-panel {
+  flex: 0 0 320px;
+  background-color: #1e3a8a;
+  color: #ffffff;
+  border-radius: var(--fr-radius-lg);
+  padding: 18px 18px 20px;
+  border: 1px solid #1e3a8a;
+  box-shadow: var(--fr-shadow-soft);
+  align-self: flex-start;
+}
+
+/* 左侧 bar 里面的文字保持白色 */
+
+.fr-accessibility-panel h2,
+.fr-accessibility-panel label,
+.fr-accessibility-panel span,
+.fr-accessibility-panel li,
+.fr-accessibility-panel p {
+  color: #ffffff;
+}
+
+.fr-main-panel {
+  flex: 1;
+  background: var(--fr-surface);
+  border-radius: var(--fr-radius-lg);
+  padding: 24px 28px 32px;
+  border: 1px solid var(--fr-border);
+  box-shadow: var(--fr-shadow-soft);
+}
+
+/* 语言切换在右上角 */
+
+.fr-language-switcher {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.fr-language-toggle {
+  border: none;
+  background: transparent;
+  color: var(--fr-muted);
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 999px;
+  text-decoration: underline;
+}
+
+.fr-language-toggle--active {
+  background: var(--fr-primary);
+  color: #ffffff;
+  text-decoration: none;
+}
+
+/* 标题 */
+
+.fr-main-title {
+  margin: 0 0 4px;
+  font-size: 1.6rem;
+}
+
+.fr-main-subtitle {
+  margin: 0 0 16px;
+  font-size: 0.95rem;
+  color: var(--fr-muted);
+}
+
+/* Tabs */
+
+.fr-tabs {
+  display: inline-flex;
+  gap: 8px;
+  margin-bottom: 16px;
+  border-radius: 999px;
+  padding: 4px;
+  background: #e5edff;
+}
+
+.fr-tab-button {
+  border: none;
+  background: transparent;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: #1e3a8a;
+}
+
+.fr-tab-button--active {
+  background: #ffffff;
+  color: #1d4ed8;
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.35);
+}
+
+/* 通用文字样式 */
+
+.fr-section {
+  margin-bottom: 20px;
+}
+
+.fr-section-title {
+  font-size: 1.1rem;
+  margin: 0 0 10px;
+}
+
+.fr-note {
+  font-size: 0.9rem;
+  color: var(--fr-note);
+  margin: 0;
+}
+
+.fr-note--small {
+  font-size: 0.8rem;
+}
+
+/* Info banner */
+
+.fr-info-banner {
+  border-radius: var(--fr-radius-md);
+  border: 1px solid #bfdbfe;
+  background: #eff6ff;
+  padding: 10px 12px;
+  display: flex;
+  gap: 8px;
+  align-items: flex-start;
+}
+
+.fr-info-banner p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #1e3a8a;
+}
+
+.fr-info-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: #1d4ed8;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+/* 表单相关 */
+
+.fr-field-group {
+  margin-bottom: 6px;
+}
+
+.fr-label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.fr-field-help {
+  font-size: 0.85rem;
+  color: var(--fr-note);
+  margin: 0 0 4px;
+}
+
+.fr-textarea {
+  width: 100%;
+  resize: vertical;
+  min-height: 120px;
+  border-radius: var(--fr-radius-md);
+  border: 1px solid var(--fr-border);
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+.fr-textarea:focus {
+  outline: none;
+  border-color: var(--fr-primary);
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.3);
+}
+
+.fr-text-input {
+  width: 100%;
+  border-radius: var(--fr-radius-md);
+  border: 1px solid var(--fr-border);
+  padding: 8px 10px;
+  font-size: 0.95rem;
+  font-family: inherit;
+}
+
+.fr-text-input:focus {
+  outline: none;
+  border-color: var(--fr-primary);
+  box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.25);
+}
+
+.fr-select {
+  width: 100%;
+  border-radius: var(--fr-radius-md);
+  border: 1px solid var(--fr-border);
+  padding: 8px 10px;
+  font-size: 0.95rem;
+}
+
+/* 按钮 */
+
+.fr-primary-button,
+.fr-secondary-button,
+.fr-inline-button,
+.fr-pill-button,
+.fr-confirm-button {
+  font-family: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
+  border-radius: 999px;
+  border: none;
+}
+
+.fr-primary-button {
+  background: var(--fr-primary);
+  color: #ffffff;
+  padding: 8px 16px;
+}
+
+.fr-primary-button:hover {
+  background: var(--fr-primary-dark);
+}
+
+.fr-secondary-button {
+  background: #e5edff;
+  color: #1d4ed8;
+  padding: 8px 16px;
+}
+
+.fr-secondary-button:hover {
+  background: #dbeafe;
+}
+
+.fr-inline-button {
+  background: #e5edff;
+  color: #1d4ed8;
+  padding: 6px 12px;
+  margin-top: 8px;
+}
+
+.fr-inline-button:hover {
+  background: #dbeafe;
+}
+
+.fr-pill-button {
+  background: #e5e7eb;
+  color: #111827;
+  padding: 6px 12px;
+}
+
+.fr-pill-button:hover {
+  background: #d1d5db;
+}
+
+/* 确认信息按钮 */
+
+.fr-confirm-button {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  background: var(--fr-primary);
+  color: #ffffff;
+  box-shadow: 0 10px 18px rgba(37, 99, 235, 0.35);
+}
+
+.fr-confirm-button:hover {
+  background: var(--fr-primary-dark);
+}
+
+/* 步骤按钮区 */
+
+.fr-steps-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Clarifier */
+
+.fr-followup-meta {
+  font-size: 0.8rem;
+  color: var(--fr-note);
+  margin-bottom: 4px;
+}
+
+.fr-followup-question {
+  margin-bottom: 6px;
+}
+
+.fr-followup-input-row {
+  margin: 8px 0 4px;
+}
+
+.fr-followup-answer-readonly {
+  margin-top: 4px;
+}
+
+.fr-fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+
+.fr-radio-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 2px 0;
+}
+
+/* Summary list */
+
+.fr-summary-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.fr-summary-list li {
+  padding: 6px 0;
+  border-bottom: 1px dashed #e5e7eb;
+}
+
+/* Program cards */
+
+.fr-program-card {
+  border-radius: var(--fr-radius-md);
+  border: 1px solid var(--fr-border);
+  padding: 10px 12px 12px;
+  margin-bottom: 14px;
+  background: #f9fafb;
+}
+
+.fr-program-card h3 {
+  margin: 0 0 4px;
+}
+
+.fr-program-note {
+  font-size: 0.9rem;
+  color: var(--fr-note);
+}
+
+.fr-status-extra {
+  font-size: 0.9rem;
+  color: #1d4ed8;
+  background: #eff6ff;
+  border-radius: 8px;
+  padding: 6px 8px;
+  margin-top: 4px;
+}
+
+/* Staff view table */
+
+.fr-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.fr-table th,
+.fr-table td {
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--fr-border);
+  text-align: left;
+}
+
+.fr-table th {
+  width: 35%;
+  font-weight: 600;
+}
+
+/* Priority 区块 */
+
+.fr-priority-container {
+  border-radius: var(--fr-radius-md);
+  border: 1px solid var(--fr-border);
+  padding: 10px 12px;
+  background: #f9fafb;
+}
+
+.fr-priority-summary {
+  margin: 0 0 2px;
+  font-size: 0.9rem;
+}
+
+.fr-priority-reasons {
+  margin: 4px 0 0;
+  padding-left: 18px;
+  font-size: 0.9rem;
+}
+
+/* JSON 预览 */
+
+.fr-pre {
+  font-size: 0.8rem;
+  background: #020617;
+  color: #e5e7eb;
+  padding: 10px 12px;
+  border-radius: var(--fr-radius-md);
+  overflow: auto;
+}
+
+/* Accessibility panel 内部 */
+
+.fr-accessibility-panel h2 {
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-size: 1.1rem;
+}
+
+.fr-toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+  margin-bottom: 6px;
+}
+
+.fr-slider-row {
+  margin-top: 10px;
+  margin-bottom: 6px;
+}
+
+.fr-slider-row label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  margin-bottom: 4px;
+}
+
+/* 滑块整体宽度 */
+
+.fr-slider-row input[type="range"] {
+  width: 100%;
+}
+
+/* 左侧 bar 内的滑块样式：浅轨道 + 明显的滑块 */
+
+.fr-accessibility-panel input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 999px;
+  background-color: #bfdbfe;
+}
+
+/* WebKit 浏览器的轨道 */
+
+.fr-accessibility-panel input[type="range"]::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background-color: #bfdbfe;
+}
+
+/* WebKit 浏览器的滑块 */
+
+.fr-accessibility-panel input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  margin-top: -4px;
+  border-radius: 50%;
+  background-color: #0ea5e9;
+  border: 2px solid #ffffff;
+  cursor: pointer;
+}
+
+/* Firefox 的轨道 */
+
+.fr-accessibility-panel input[type="range"]::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background-color: #bfdbfe;
+}
+
+/* Firefox 的滑块 */
+
+.fr-accessibility-panel input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background-color: #0ea5e9;
+  border: 2px solid #ffffff;
+  cursor: pointer;
+}
+
+.fr-accessibility-presets {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.fr-help-title {
+  margin-top: 8px;
+  margin-bottom: 4px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/* 确认面板 */
+
+.fr-confirm-panel {
+  border-radius: var(--fr-radius-md);
+  border: 1px solid #bfdbfe;
+  background: #eff6ff;
+  padding: 12px 14px 14px;
+}
+
+/* 视图容器 */
+
+.fr-view {
+  line-height: var(--fr-line-height);
+}
+
+.fr-footer {
+  position: fixed;
+  right: 20px;
+  bottom: 16px;
+  font-size: 0.8rem;
+  color: var(--fr-note);
+  background: transparent;
+}
